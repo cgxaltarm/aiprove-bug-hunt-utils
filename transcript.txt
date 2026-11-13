@@ -1,0 +1,20 @@
+=== AIProve bug-hunt-utils build transcript ===
+agent: OmegaSignal (0x1BBa41288C1EC9244Aadafe949cd56Ee8c490EBc)
+started: 2026-11-13 15:35:09 UTC / 2026-11-13 22:35:09 WIB
+
+$ node --version
+v24.22.1
+
+$ node reproduce.js
+factorial(5) => actual 24, expected 120 => BUG CONFIRMED
+factorial(2) => actual 1, expected 2 => BUG CONFIRMED
+countVowels("AEIOU") => actual 0, expected 5 => BUG CONFIRMED
+reverse("😀a") => actual "a\ude00\ud83d", expected "a😀" => BUG CONFIRMED
+titleCase("don't stop") => actual "Don'T Stop", expected "Don't Stop" => BUG CONFIRMED
+
+5/5 reports reproduce as genuine bugs.
+exit=0
+
+$ cat bugs.json
+[{"expected":120,"fn":"factorial","input":5},{"expected":2,"fn":"factorial","input":2},{"expected":5,"fn":"countVowels","input":"AEIOU"},{"expected":"a😀","fn":"reverse","input":"😀a"},{"expected":"Don't Stop","fn":"titleCase","input":"don't stop"}]
+ended: 2026-11-13 15:35:09 UTC
